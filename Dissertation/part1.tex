@@ -7,7 +7,7 @@
 %\newpage
 %============================================================================================================================
 
-\section{Ссылки} \label{sect1_2}
+\section{\todo{Обзор литературы}} \label{sect1_2}
 Сошлёмся на библиографию. Одна ссылка: \cite[с.~54]{Sokolov}\cite[с.~36]{Gaidaenko}. Две ссылки: \cite{Sokolov,Gaidaenko}. Много ссылок:  \cite[с.~54]{Lermontov,Management,Borozda} \cite{Lermontov,Management,Borozda,Marketing,Constitution,FamilyCode,Gost.7.0.53,Razumovski,Lagkueva,Pokrovski,Sirotko,Lukina,Methodology,Encyclopedia,Nasirova,Berestova,Kriger}. И ещё немного ссылок: \cite{Article,Book,Booklet,Conference,Inbook,Incollection,Manual,Mastersthesis,Misc,Phdthesis,Proceedings,Techreport,Unpublished}. \cite{medvedev2006jelektronnye, CEAT:CEAT581, doi:10.1080/01932691.2010.513279,Gosele1999161,Li2007StressAnalysis, Shoji199895,test:eisner-sample,AB_patent_Pomerantz_1968,iofis_patent1960}
 
 %Попытка реализовать несколько ссылок на конкретные страницы для стандартной реализации:[\citenum{Sokolov}, с.~54; \citenum{Gaidaenko}, с.~36].
@@ -21,6 +21,38 @@
 Сошлёмся на формулу: формула \eqref{eq:equation1}.
 
 Сошлёмся на изображение: рисунок \ref{img:knuth}.
+
+\subsection{\todo{Где вообще используется ML для решения практических задач}}
+Теория обучения машин (machine learning, машинное обучение) находится на стыке прикладной статистики, численных методов оптимизации, дискретного анализа, и за последние 50 лет оформилась в самостоятельную математическую дисциплину. Методы машинного обучения составляют основу ещё более молодой дисциплины — интеллектуального анализа данных (data mining).  \cite{воронцов2009машинное} \cite{marsland2015machine} \cite{conway2012machine}
+\todo{Перевести введения из источников}
+Использование машинного обучения в медицине \todo{(написать)}: \cite{shipp2002diffuse} \cite{ye2003predicting}
+
+\subsection{\todo{ML в телекоме, Q-learning, reinforcement learning}}
+
+\cite{лаптев2011применение} \cite{Magnusson:2012:SCW:2351316.2351327} \cite{hung2006applying} \cite{nelson2008exploiting} \cite{arisholm2007data} \cite{nguyen2012timely} 
+Reinforcement learning is the learning of a mapping from situations to actions so as to maximize a scalar reward or reinforcement signal. The learner is not told which action to take, as in most forms of machine learning, but instead must discover which actions yield the highest reward by trying them. In the most interesting and challenging cases, actions may affect not only the immediate's reward, but also the next situation, and through that all subsequent rewards. These two characteristics-trial-and-error search and delayed reward-are the two most important distinguishing features of reinforcement learning. \cite{book:963927} \cite{sutton1998introduction}
+
+
+
+\subsection{\todo{ML, ранжирование, решающие леса, xgboost, boosting}}
+Tree boosting is a highly effective and widely used machine learning method. A scalable end-to-end tree boosting system called XGBoost is used widely by data scientists to achieve state-of-the-art results on many machine learning challenges. \cite{DBLP:journals/corr/ChenG16} 
+
+Логические модели широко используются для решения задач распознавания и прогнозирования. Это объясняется хорошей интерпретируемостью моделей, имеющих вид логических закономерностей, высокой прогнозирующей способностью, возможностью обрабатывать разнотипные переменные, выделять наиболее важные факторы. Логическую модель можно строить после группировки объектов некоторым алгоритмом, то есть решать задачу распознавания образов в классе логических решающих функций, где под образами понимаются номера кластеров, приписанные объектам. Существуют и алгоритмы, в которых группировка осуществляется непосредственно в ходе построения логической модели. \cite{бериков2008современные}
+
+\todo{Написать своими словами введение}Machine learning: An artificial intelligence approach\cite{michalski2013machine}
+
+Recently there has been a lot of interest in “ensemble learning” — methods that generate many classifiers and aggregate their results. Two well-known methods are boosting (see, e.g., Shapire et al., 1998) and bagging Breiman (1996) of classification trees. In boosting, successive trees give extra weight to points incorrectly predicted by earlier predictors. In the end, a weighted vote is taken for prediction. In bagging, successive trees do not depend on earlier trees — each is independently constructed using a bootstrap sample of the data set. In the end, a simple majority vote is taken for prediction. Breiman (2001) proposed random forests, which add an additional layer of randomness to bagging. In addition to constructing each tree using a different bootstrap sample of the data, random forests change how the classification or regression trees are constructed. In standard trees, each node is split using the best split among all variables. In a random forest, each node is split using the best among a subset of predictors randomly chosen at that node. This somewhat counterintuitive strategy turns out to perform very well compared to many other classifiers, including discriminant analysis, support vector machines and neural networks, and is robust against overfitting (Breiman, 2001). In addition, it is very user-friendly in the sense that it has only two parameters (the number of variables in the random subset at each node and the number of trees in the forest), and is usually not very sensitive to their values. \cite{liaw2002classification}
+
+%\newpage
+%============================================================================================================================
+
+
+\subsection{Обзор литературы} \label{sect1_2_1}
+Попытаюсь скопировать информацию о литературе и сослаться на нее. 
+
+There has recently been some interest in applying machine learning techniques to support the acquisition and adaptation of workflow models. The different learning algorithms, that have been proposed, share some restrictions, which may prevent them from being used in practice. Approaches applying techniques from grammatical inference are restricted to sequential workflows. Other algorithms allowing concurrency require unique activity nodes. This contribution shows how the basic principle of our previous approach to sequential workflow induction can be generalized, so that it is able to deal with concurrency. It does not require unique activity nodes. The presented approach uses a log-likelihood guided search in the space of workflow models, that starts with a most general workflow model containing unique activity nodes. Two split operators are available for specialization. \cite{Herbst2000}
+
+
 
 %\newpage
 %============================================================================================================================
