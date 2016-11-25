@@ -156,4 +156,4 @@ ehthumbs.db
 Thumbs.db
 
 # vim swap
-.swp
+*.swp
