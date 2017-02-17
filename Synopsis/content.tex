@@ -33,19 +33,19 @@
 
 \underline{\textbf{Первая глава}} посвящена ...
 
- картинку можно добавить так:
-\begin{figure}[ht] 
-  \center
-  \includegraphics [scale=0.27] {latex}
-  \caption{Подпись к картинке.} 
-  \label{img:latex}
-\end{figure}
+%  картинку можно добавить так:
+% \begin{figure}[ht] 
+%   \center
+%   \includegraphics [scale=0.27] {latex}
+%   \caption{Подпись к картинке.} 
+%   \label{img:latex}
+% \end{figure}
 
-Формулы в строку без номера добавляются так:
-\[ 
-  \lambda_{T_s} = K_x\frac{d{x}}{d{T_s}}, \qquad
-  \lambda_{q_s} = K_x\frac{d{x}}{d{q_s}},
-\]
+% Формулы в строку без номера добавляются так:
+% \[ 
+%   \lambda_{T_s} = K_x\frac{d{x}}{d{T_s}}, \qquad
+%   \lambda_{q_s} = K_x\frac{d{x}}{d{q_s}},
+% \]
 
 \underline{\textbf{Вторая глава}} посвящена исследованию 
 
@@ -58,9 +58,9 @@
 
 
 %\newpage
-При использовании пакета \verb!biblatex! список публикаций автора по теме
-диссертации формируется в разделе <<\publications>>\ файла
-\verb!../common/characteristic.tex!  при помощи команды \verb!\nocite! 
+% При использовании пакета \verb!biblatex! список публикаций автора по теме
+% диссертации формируется в разделе <<\publications>>\ файла
+% \verb!../common/characteristic.tex!  при помощи команды \verb!\nocite! 
 
 \ifdefmacro{\microtypesetup}{\microtypesetup{protrusion=false}}{} % не рекомендуется применять пакет микротипографики к автоматически генерируемому списку литературы
 \ifnumequal{\value{bibliosel}}{0}{% Встроенная реализация с загрузкой файла через движок bibtex8
