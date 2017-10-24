@@ -210,7 +210,7 @@ ID места (станции или перегона), ID объекта изм
 
 \begin{figure*}
 \centering
-\includegraphics[width=6cm]{initialFeatureScores}
+\includegraphics[width=16cm]{initialFeatureScores}
 \caption{Анализ важности признаков: эффективность отдельных признаков}
 \centering
 \label{fig:initialFeatureScores}
@@ -278,12 +278,16 @@ ID места (станции или перегона), ID объекта изм
 \nomenclature{ДОО}{Доля охваченных отказов} 
 
 \begin{figure}[thb] 
-\begin{center}
-\begin{subfigure}[c]{0.45\textwidth}
-        \includegraphics[width=1\linewidth]{latexRoc.png}
-\end{subfigure}
-%\includegraphics[width=0.5\linewidth]{latexRoc}
-\begin{subfigure}[c]{0.45\textwidth}
+\centering
+\includegraphics[width=0.5\textwidth]{latexRoc.png}
+\caption{Кривые ошибок и связанные с ними характеристики для основной и референсной моделей. Выделенные точки отвечают ДОО 0.95 и  0.99.}\label{fig:ROCcurves} 
+\end{figure}
+
+\begin{table} [htbp]
+  \label{tbl:aucresults}
+  \centering
+  %\captionsetup{width=15cm}
+  \caption{Количественные результаты ранжирования}\label{Ts0Sib}%
 \begin{tabular}{ l c c c}
 \toprule
 \cyrins{\textbf{Модель}} & \cyrins{\textbf{AUC}} & \cyrins{\textbf{ДОИ95\%}} & \cyrins{\textbf{ДОИ99\%}} \\ \midrule
@@ -291,10 +295,7 @@ ID места (станции или перегона), ID объекта изм
 Референсная & 0.768 & 0.733 & 0.818\\
 \bottomrule
 \end{tabular}
-\end{subfigure}
-\caption{Кривые ошибок и связанные с ними характеристики для основной и референсной моделей. Выделенные точки отвечают ДОО 0.95 и  0.99.}\label{fig:ROCcurves} 
-\end{center}
-\end{figure}
+\end{table}
 
 На рис. \ref{fig:ROCcurves} показаны кривые ошибок для основной и референсной моделей ранжирования. Чем выше лежит кривая, тем лучше. Максимально возможное положение кривой соответствует линейной функции $\text{ДОО}=\frac{ДОИ}{\alpha},$ где $\alpha\approx 0.024$ -- доля предотказов среди всех инцидентов. Если оператор выбирает инцидент наугад (без рассмотрения ранга), то кривая ошибок является диагональю квадрата.
 
