@@ -23,12 +23,12 @@
 
 % Сошлёмся на изображение: рисунок \ref{img:knuth}.
 
-\subsection{\todo{Где вообще используется ML для решения практических задач}}
+\subsection{\todo{Практические задачи индустрии в контексте машинного обучения}}
 Теория обучения машин (machine learning, машинное обучение) находится на стыке прикладной статистики, численных методов оптимизации, дискретного анализа, и за последние 50 лет оформилась в самостоятельную математическую дисциплину. Методы машинного обучения составляют основу ещё более молодой дисциплины — интеллектуального анализа данных (data mining).  \cite{воронцов2009машинное} \cite{marsland2015machine} \cite{conway2012machine}
 \todo{Перевести введения из источников}
 Использование машинного обучения в медицине \todo{(написать)}: \cite{shipp2002diffuse} \cite{ye2003predicting}
 
-\subsection{\todo{ML в телекоме, Q-learning, reinforcement learning}}
+\subsection{Машинное обучение в задачах из области телекоммуникаций}
 
 \cite{лаптев2011применение} \cite{Magnusson:2012:SCW:2351316.2351327} \cite{hung2006applying} \cite{nelson2008exploiting} \cite{arisholm2007data} \cite{nguyen2012timely} 
 Reinforcement learning is the learning of a mapping from situations to actions so as to maximize a scalar reward or reinforcement signal. The learner is not told which action to take, as in most forms of machine learning, but instead must discover which actions yield the highest reward by trying them. In the most interesting and challenging cases, actions may affect not only the immediate's reward, but also the next situation, and through that all subsequent rewards. These two characteristics-trial-and-error search and delayed reward-are the two most important distinguishing features of reinforcement learning. \cite{book:963927} \cite{sutton1998introduction}
@@ -38,7 +38,7 @@ Reinforcement learning is the learning of a mapping from situations to actions s
 \subsection{\todo{ML, ранжирование, решающие леса, xgboost, boosting}}
 Tree boosting is a highly effective and widely used machine learning method. A scalable end-to-end tree boosting system called XGBoost is used widely by data scientists to achieve state-of-the-art results on many machine learning challenges. \cite{DBLP:journals/corr/ChenG16} 
 
-Логические модели широко используются для решения задач распознавания и прогнозирования. Это объясняется хорошей интерпретируемостью моделей, имеющих вид логических закономерностей, высокой прогнозирующей способностью, возможностью обрабатывать разнотипные переменные, выделять наиболее важные факторы. Логическую модель можно строить после группировки объектов некоторым алгоритмом, то есть решать задачу распознавания образов в классе логических решающих функций, где под образами понимаются номера кластеров, приписанные объектам. Существуют и алгоритмы, в которых группировка осуществляется непосредственно в ходе построения логической модели. \cite{бериков2008современные}
+Логические модели широко используются \cite{бериков2008современные} для решения задач распознавания и прогнозирования. Это объясняется хорошей интерпретируемостью моделей, имеющих вид логических закономерностей, высокой прогнозирующей способностью, возможностью обрабатывать разнотипные переменные, выделять наиболее важные факторы. Логическую модель можно строить после группировки объектов некоторым алгоритмом, то есть решать задачу распознавания образов в классе логических решающих функций, где под образами понимаются номера кластеров, приписанные объектам. Существуют и алгоритмы, в которых группировка осуществляется непосредственно в ходе построения логической модели. 
 
 \todo{Написать своими словами введение}Machine learning: An artificial intelligence approach\cite{michalski2013machine}
 
@@ -75,7 +75,7 @@ There has recently been some interest in applying machine learning techniques to
 
 \begin{equation}
     \label{eq:j_pi}
-     J_\pi(x) = 
+     J_{\pi}(x) = 
      \sum_{s=0}^{\infty}
        \sum_{u', x'}{
           \pi(u'|x')p_\pi(x'|x; s)R(x', u')\gamma^s
