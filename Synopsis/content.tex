@@ -26,6 +26,103 @@
 
 
 \underline{\textbf{В первой главе}} обосновывается необходимость построения системы управления технологическими процессами, а также выявляется круг основных проблем  в сфере автоматизации критических процессов с применением методов машинного обучения в эргатических системах.
+\section{Машинное обучение в задачах управления инфраструктурой}
+
+\subsection{Методы машинного обучения с подкреплением}
+
+Рассмотрим марковский процесс первого порядка с дискретным временем, в котором  вероятность перехода из состояния $x$ в состояние $x'$ под действием $u$ задается как $p_0(x'|x,u)$.  Далее будем рассматривать эволюцию системы на бесконечном горизонте времени, с дисконтированием целевой функции со временем. Введем функцию вознаграждения, зависящую от текущего состояния и применяемого действия  как $R(x,u)$ и политику $\pi(u|x)$, определяющую вероятность применения действия в зависимости от текущего состояния $x$.
+
+Предполагая, что политика $\pi$ и начальное состояние системы $x_0$ заданы, вероятность найти систему в состоянии $x_t$ на момент времени $t > 0$ задается следующим выражением:
+
+\begin{equation}
+    \label{eq:pxxt}
+     p_\pi(x_t|x_0; t) =
+     \sum_{u_{0:t−1}, x_{1:t−1}}{
+     	\prod_{s=0}^{t-1} {
+        	p_0(x_{s+1}|x_s, u_x) \pi(u_s|x_s)
+         }
+      }
+\end{equation}
+
+Таким образом ожидаемое дисконтированное вознаграждение в состоянии $x$, при следовании политике $\pi$ задается следующим выражением:
+
+\begin{equation}
+    \label{eq:j_pi}
+     J_{\pi}(x) =
+     \sum_{s=0}^{\infty}
+       \sum_{u', x'}{
+          \pi(u'|x')p_\pi(x'|x; s)R(x', u')\gamma^s
+        }
+\end{equation}
+, где $\gamma$ - коэффициент дисконтирования ($0 < \gamma < 1$) и $p_pi(x'|x, 0) = \delta_{x,x'}$. Функция $J_\pi(x)$ называется функцией полезности и определяет ожидаемые выигрыш (вознаграждение) при следовании политике $\pi$. Цель обучения с подкреплением заключается в поиске политики $\pi$, максимизирующей значение $J_\pi(x)$ для всех значений $x$.
+
+Выражение для $J_\pi(x)$ можно переписать в рекурсивном виде:
+\begin{equation}
+    \label{eq:j_pi_rec}
+    \begin{split}
+     J_\pi(x) &=
+     \sum_u {\pi(u|x)R(x,u)} +
+     \sum_{s=1}^{\infty}
+       \sum_{u', x'}{
+          \pi(u'|x')p_\pi(x'|x; s)R(x', u')\gamma^s
+        } \\
+        &= \sum_u {\pi(u|x)} \left(
+        R(x,u) + \gamma \sum_{x'}{
+        		p_0(x'|x; u)J_{\pi}(x')
+            }
+       		\right)
+            \end{split}
+\end{equation}
+
+Процесс нахождения $J_\pi(x)$ методом последовательных приближений (см. подробнее~\cite{sutton1998reinforcement}) называется оценкой политики (англ. policy evaluation). После нахождения некоторой оценки  $J_\pi(x)$ мы можем предложить новую политику $\pi'$:
+
+\begin{equation}
+    \label{eq:new_policy}
+    \begin{split}
+    & \pi'(u|x) = \delta_{u,u(x)}, \\
+    & u(x) = \argmax_u R(x, u) + \gamma \sum_{x'} p_0(x'|x, u)J_\pi(x')
+    \end{split}
+\end{equation}
+
+Очевидно, что для новой политики $\pi'$ , будет выполняется выражение $J_{\pi'}(x) \geq J_\pi(x), \forall x$. Может быть показано, что итеративный процедура $$\pi_0 \rightarrow J_{\pi_0} \rightarrow \pi_1 \rightarrow J_{\pi_1} \rightarrow \pi_2 \rightarrow ... \rightarrow J^*$$ сходится  к оптимальному значению $J^*$.
+
+Отметим, что в рассуждениях выше предполагается, что функции $p_0(x'|x,u)$, $R(x,u)$ заранее известны. Перейдем к ситуации, когда это окружение заранее не задано. В этом случае возможно либо выучить эти функции в процессе исследования и перейти к итеративной процедуре поиска оптимальной политики, либо использовать подходы обучения с подкреплением, не предполагающие априорное наличие модели ($p_0(x'|x,u)$, $R(x,u)$) - TD-Lambda \cite{sutton1998reinforcement} или Q-learning~\cite{Watkins:1989}.
+
+В случае, когда $p_0(x'|x,u)$, $R(x,u)$ не известны, оценку дисконтированного вознаграждения для состояния $x$ ($J_\pi(x)$, см. уравнение (\ref{eq:j_pi})) можно получить при помощи сэмплирования:
+
+\begin{equation}
+    \label{eq:j_sampling}
+   	J_\pi(x) = (1-\alpha)J_\pi(x) + \alpha(r + \gamma J_\pi(x')).
+\end{equation}
+, где $x$ - текущее состояние, $x'$ - новое состояние после выбора действия $u$ при следовании политике $\pi(u|x)$ и $r$ - наблюдаемая награда.
+
+Уравнение~(\ref{eq:j_sampling}) соответствует ~\cite{sutton1998reinforcement} алгоритму TD(0). Отметим, что, применяя этот подход, перед выбором новой стратегии $\pi'$ требуется дождаться схождения алгоритма. Если же на каждой итерации менять политику $\pi'$ согласно уравнению (\ref{eq:new_policy}), получается другой подход, известный под названием Actor-Critic (см.~\cite{actor_critic}).
+
+Более элегантный способ вычисления оптимальной политики без модели ($p_0(x'|x,u)$, $R(x,u)$) был предложен \cite{Watkins:1989} К. Ваткинсом. Обозначим как $Q(x, u)$ ожидаемое значение функции полезности состояния $x$ при выполнении действия $u$ и дальнейшем следовании оптимальной политике:
+
+\begin{equation}
+    \label{eq:q_learning_definition}
+    \begin{split}
+      & Q(x, u) = R(x, u) + \gamma \sum_{x'} {
+          p_0(x'|x, u) \max_{u'} Q(x', u')
+       }
+       \\
+      & J^{∗}(x) = \max_{u} Q(x,u)
+     \end{split}
+\end{equation}
+
+В стохастическом окружении и при использовании онлайн-обучения уравнение (\ref{eq:q_learning_definition}) приобретает следующий вид:
+
+\begin{equation}
+    \label{eq:q_learning_online_stochastic}
+    Q(x, u) = Q(x, u) + \alpha(R(x, u) + \gamma max_{u'} Q(x', u') − Q(x, u))
+\end{equation},
+где $\alpha$ - коэффициент, определяющий скорость обучения, $\gamma$ - коэффициент дисконтирования вознаграждений со временем. Далее мы будем придерживаться этих обозначений при формулировании задачи обучения с подкреплением.
+
+
+
+\cite{лаптев2011применение, Magnusson:2012:SCW:2351316.2351327, hung2006applying, nelson2008exploiting, arisholm2007data, nguyen2012timely}
+Reinforcement learning is the learning of a mapping from situations to actions so as to maximize a scalar reward or reinforcement signal. The learner is not told which action to take, as in most forms of machine learning, but instead must discover which actions yield the highest reward by trying them. In the most interesting and challenging cases, actions may affect not only the immediate's reward, but also the next situation, and through that all subsequent rewards. These two characteristics-trial-and-error search and delayed reward-are the two most important distinguishing features of reinforcement learning. \cite{book:963927, sutton1998introduction}
 
 \todo{Первая глава что было до меня и в чем задача}
 \todo{Содержание главы опубликовано в работах... }
